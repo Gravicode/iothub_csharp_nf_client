@@ -1,8 +1,11 @@
 // Copyright (c) Microsoft. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System;
+
 namespace Microsoft.Azure.Devices.Client
 {
+   
     public static class NetMFStringExtensions
     {
         public static bool IsNullOrWhiteSpace(this string value)
@@ -40,8 +43,8 @@ namespace Microsoft.Azure.Devices.Client
 
                 // create DateTime with these values
                 // make sure it's UTC
-                result = new System.DateTime(year, month, day, hour, minute, second, 0).ToUniversalTime();
-
+                result = new System.DateTime(year, month, day, hour, minute, second, 0).ToUniversalTime(new TimeSpan(7, 0, 0));
+                
                 // we should have a valid DateTime 
                 return true;
             }
@@ -58,7 +61,7 @@ namespace Microsoft.Azure.Devices.Client
 
                 // create DateTime with these values
                 // make sure it's UTC
-                result = new System.DateTime(int.Parse(date[2]), int.Parse(date[0]), int.Parse(date[1]), int.Parse(time[0]), int.Parse(time[1]), int.Parse(time[2])).ToUniversalTime();
+                result = new System.DateTime(int.Parse(date[2]), int.Parse(date[0]), int.Parse(date[1]), int.Parse(time[0]), int.Parse(time[1]), int.Parse(time[2])).ToUniversalTime(new TimeSpan(7,0,0));
 
                 // check for PM time and add 12H if required
                 if (splitDateTime[2] == "PM")

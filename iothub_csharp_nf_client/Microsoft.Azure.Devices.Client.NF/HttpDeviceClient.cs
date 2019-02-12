@@ -41,7 +41,7 @@ namespace Microsoft.Azure.Devices.Client
             MapMessageProperties2HttpHeaders.Add(MessageSystemPropertyNames.UserId, CustomHeaderConstants.UserId);
 
             // make sure we are using RFC4648 encoding for Base64 (.Net MF default is not RFC4648)
-            Convert.UseRFC4648Encoding = true;
+            //Convert.UseRFC4648Encoding = true;
         }
 
         /// <summary>

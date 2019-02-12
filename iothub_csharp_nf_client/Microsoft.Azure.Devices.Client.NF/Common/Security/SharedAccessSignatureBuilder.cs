@@ -110,7 +110,7 @@ namespace Microsoft.Azure.Devices.Client
 
         private string BuildExpiresOn(TimeSpan timeToLive)
         {
-#if MF_FRAMEWORK_VERSION_V4_3 || NANOFRAMEWORK
+#if MF_FRAMEWORK_VERSION_V4_3 
             // .NETMF < v4.4 had a know bug with DateTime.Kind: values were always created with DateTimeKind.Local 
             // this requires us to perform an extra step to make a DateTime to be in UTC, otherwise the expiry date will be calculated wrongly
 
@@ -118,7 +118,7 @@ namespace Microsoft.Azure.Devices.Client
             DateTime expiresOn = TimeZone.CurrentTimeZone.ToUniversalTime(DateTime.UtcNow.Add(timeToLive));
             TimeSpan secondsFromBaseTime = expiresOn.Subtract(TimeZone.CurrentTimeZone.ToUniversalTime(SharedAccessSignatureConstants.EpochTime));
             return (secondsFromBaseTime.Ticks / TimeSpan.TicksPerSecond).ToString();
-#elif MF_FRAMEWORK_VERSION_V4_4
+#elif MF_FRAMEWORK_VERSION_V4_4 || NANOFRAMEWORK
             DateTime expiresOn = DateTime.UtcNow.Add(timeToLive);
             TimeSpan secondsFromBaseTime = expiresOn.Subtract(SharedAccessSignatureConstants.EpochTime);
             return ((uint)(secondsFromBaseTime.Ticks / TimeSpan.TicksPerSecond)).ToString();
