@@ -14,6 +14,7 @@ namespace NFDeviceClientHttpSample.csproj
         //  "HostName=<iothub_host_name>;DeviceId=<device_id>;SharedAccessKey=<device_key>"
         //  "HostName=<iothub_host_name>;CredentialType=SharedAccessSignature;DeviceId=<device_id>;SharedAccessSignature=SharedAccessSignature sr=<iot_host>/devices/<device_id>&sig=<token>&se=<expiry_time>";
         private const string DeviceConnectionString = "HostName=FreeDeviceHub.azure-devices.net;DeviceId=ArduinoDevice;SharedAccessKey=9dqsi9BV1I5L43YsKcx7id/8b5F9ofkznTWDireYSfA=";
+        //HostName=FreeDeviceHub.azure-devices.net;DeviceId=ArduinoDevice;SharedAccessKey=9dqsi9BV1I5L43YsKcx7id/8b5F9ofkznTWDireYSfA=
 
         private static int MESSAGE_COUNT = 5;
         // Set the SSID & Password to your local WiFi network
@@ -31,16 +32,12 @@ namespace NFDeviceClientHttpSample.csproj
                 wifi.AvailableNetworksChanged += Wifi_AvailableNetworksChanged;
 
                 // Loop forever scanning every 30 seconds
-                while (true)
+                //while (true)
                 {
                     Console.WriteLine("starting WiFi scan");
                     wifi.ScanAsync();
-                    if (IsConnect)
-                    {
-                        Thread th1 = new Thread(new ThreadStart(Looping));
-                        th1.Start();
-                    }
-                    Thread.Sleep(100000);
+                   
+                    //Thread.Sleep(100000);
                 }
 
             }
@@ -84,6 +81,12 @@ namespace NFDeviceClientHttpSample.csproj
                     if (result.ConnectionStatus == WiFiConnectionStatus.Success)
                     {
                         Console.WriteLine("Connected to Wifi network");
+                      
+                        if (!IsConnect)
+                        {
+                            Thread th1 = new Thread(new ThreadStart(Looping));
+                            th1.Start();
+                        }
                         IsConnect = true;
                     }
                     else
