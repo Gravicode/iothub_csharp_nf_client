@@ -18,7 +18,7 @@ namespace NFDeviceClientHttpSample.csproj
 
         private static int MESSAGE_COUNT = 5;
         // Set the SSID & Password to your local WiFi network
-        const string MYSSID = "BMC123";
+        const string MYSSID = "BMC Makerspace";
         const string MYPASSWORD = "123qweasd";
 
         public static void Main()
@@ -104,6 +104,7 @@ namespace NFDeviceClientHttpSample.csproj
 
                 SendEvent(deviceClient);
                 ReceiveCommands(deviceClient);
+
 
                 Console.WriteLine("Done!\n");
             }
