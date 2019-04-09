@@ -4,6 +4,7 @@
 namespace Microsoft.Azure.Devices.Client
 {
     using System;
+    using System.Security.Cryptography.X509Certificates;
 
     /// <summary>
     /// Transport types supported by DeviceClient - Amqp and HTTP 1.1
@@ -26,6 +27,7 @@ namespace Microsoft.Azure.Devices.Client
     /// </summary>
     public sealed class DeviceClient
     {
+        public static X509Certificate CACert { set; get; }
         const string DeviceId = "DeviceId";
         const string DeviceIdParameterPattern = @"(^\s*?|.*;\s*?)" + DeviceId + @"\s*?=.*";
         
@@ -84,6 +86,8 @@ namespace Microsoft.Azure.Devices.Client
             
             throw new InvalidOperationException("Unsupported Transport Type " + transportType.ToString());
         }
+
+       
 
         /// <summary>
         /// Create an DeviceClient from the specified connection string using the specified transport type
